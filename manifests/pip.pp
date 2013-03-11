@@ -52,7 +52,11 @@ define python::pip (
         unless  => "${virtualenv}/bin/pip freeze | grep -i -e ${grep_regex}",
       }
     }
-
+    latest: {
+      exec { "pip_upgrade_${name}":
+        command => "${virtualenv}/bin/pip install --upgrade ${proxy_flag} ${name}",
+      }
+    }
     default: {
       exec { "pip_uninstall_${name}":
         command => "echo y | ${virtualenv}/bin/pip uninstall ${proxy_flag} ${name}",
