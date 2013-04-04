@@ -68,7 +68,7 @@ define python::virtualenv (
     }
 
     exec { "python_virtualenv_${venv_dir}":
-      command => "mkdir -p ${venv_dir} \
+      command => "/bin/mkdir -p ${venv_dir} \
         ${proxy_command} \
         && virtualenv -p `which ${python}` ${system_pkgs_flag} ${venv_dir} \
         && ${venv_dir}/bin/pip install ${proxy_flag} --upgrade distribute pip",
