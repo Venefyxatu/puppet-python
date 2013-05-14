@@ -12,14 +12,14 @@ class python::install {
     default => absent,
   }
 
-  package { [ "${python}-dev", 'python-pip' ]: ensure => $dev_ensure }
+  package { 'pip': ensure => $dev_ensure, category => 'dev-python' }
 
   $venv_ensure = $python::virtualenv ? {
     true    => present,
     default => absent,
   }
 
-  package { 'python-virtualenv': ensure => $venv_ensure }
+  package { 'virtualenv': ensure => $venv_ensure }
 
   $gunicorn_ensure = $python::gunicorn ? {
     true    => present,
